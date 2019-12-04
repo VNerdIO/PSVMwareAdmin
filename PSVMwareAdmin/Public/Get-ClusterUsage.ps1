@@ -1,0 +1,2 @@
+$VMHosts = Get-Cluster "$Cluster" | Get-VMHost
+$VMHosts | Select-Object Name,@{n="CPUUsage";e={[math]::round(100*($_.CpuUsageMhz/$_.CpuTotalMhz),1)}},@{n="MemoryUsage";e={[math]::round(100*($_.MemoryUsageGB/$_.MemoryTotalGB),1)}}
