@@ -63,6 +63,11 @@ Function Invoke-ZertoClusterPatch{
 	process{
 		Write-Verbose "Healthchecks passed (or skipped), restarting hosts."
 		foreach($VMHost IN $VMHosts){
+			<#
+				1. Check Zerto for active Workloads on Host
+				2. Migrate Active workloads to another host (loop)
+				3. Verify workloads moved
+			#>
 			# Put host in maintenance mode
 			try{
 				$timer = [Diagnostics.Stopwatch]::StartNew()
